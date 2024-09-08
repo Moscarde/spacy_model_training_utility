@@ -1,0 +1,19 @@
+.highlight-blue {
+    background-color: lightblue;
+}
+
+.highlight-green {
+    background-color: lightgreen;
+}
+
+.highlight-red {
+    background-color: lightcoral;
+}
+
+.text-container {
+    white-space: pre-wrap; /* Respeitar quebras de linha no texto */
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #f9f9f9;
+}

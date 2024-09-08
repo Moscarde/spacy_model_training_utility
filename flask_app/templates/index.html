@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extrator de Texto PDF</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Include custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Carregue um arquivo PDF</h1>
+        <form action="/" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <input type="file" name="pdf_file" accept="application/pdf" class="form-control-file">
+            </div>
+            <button type="submit" class="btn btn-primary">Carregar PDF</button>
+        </form>
+
+        {% if extracted_text %}
+        <div class="mt-4">
+            <button onclick="sendSelectedText('blue')" class="btn btn-primary">Azul</button>
+            <button onclick="sendSelectedText('green')" class="btn btn-success">Verde</button>
+            <button onclick="sendSelectedText('red')" class="btn btn-danger">Vermelho</button>
+            <button onclick="removeAllHighlights()" class="btn btn-secondary">Remover Marcações</button>
+        </div>
+
+        <h2 class="mt-4">Texto Extraído:</h2>
+        <div id="text-content" class="text-container">
+            {{ extracted_text | safe }}
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Include Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Include custom JS -->
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+
+</html>
