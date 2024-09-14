@@ -8,7 +8,7 @@ function getSelectedText() {
 function sendSelectedText(color) {
     const selectedText = getSelectedText();
     if (selectedText) {
-        fetch('/marcador', {
+        fetch('/highlight', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ function highlightText(text, color) {
 }
 
 function removeAllHighlights() {
-    fetch('/remover-maracacoes', { method: 'POST' })
+    fetch('/remove-highlights', { method: 'POST' })
         .then(response => response.json())
         .then(data => {
             if (data.success) {

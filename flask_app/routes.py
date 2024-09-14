@@ -39,8 +39,8 @@ def index():
 
     return render_template("index.html", extracted_text=highlighted_text)
 
-@main_routes.route("/remover-maracacoes", methods=["POST"])
-def remover_maracacoes():
+@main_routes.route("/remove-highlights", methods=["POST"])
+def remove_highlights():
     global json_filename
     if json_filename:
         try:
@@ -58,8 +58,8 @@ def remover_maracacoes():
             return jsonify({"success": False}), 500
     return jsonify({"success": False}), 400
 
-@main_routes.route("/marcador", methods=["POST"])
-def marcador():
+@main_routes.route("/highlight", methods=["POST"])
+def highlight():
     global pdf_text, json_filename
     data = request.get_json()
     target_text = data.get("text")

@@ -7,7 +7,7 @@ def extract_text_from_pdf(pdf_file):
     for page in reader.pages:
         text += page.extract_text()
     return text
-
+    
 def highlight_annotations(text, annotations):
     annotations = sorted(annotations, key=lambda x: x["points"][0]["start"], reverse=True)
     for annotation in annotations:
