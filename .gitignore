@@ -165,4 +165,3 @@ cython_debug/
 # folders
 input/
 train_data/
-_*

@@ -1,4 +1,5 @@
 import PyPDF2
+import os
 
 def extract_text_from_pdf(pdf_file):
     text = ""
@@ -24,3 +25,7 @@ def find_pos(full_text, target_text):
         end_pos = start_pos + len(target_text)
         return {"start": start_pos, "end": end_pos}
     return None
+
+def check_folder():
+    if not os.path.exists("train_data"):
+        os.makedirs("train_data")

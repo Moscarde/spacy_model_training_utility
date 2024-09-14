@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, render_template, request
 import json
 import os
-from flask_app.utils import extract_text_from_pdf, highlight_annotations, find_pos
+from flask_app.utils import extract_text_from_pdf, highlight_annotations, find_pos, check_folder
 
 
 main_routes = Blueprint('main_routes', __name__)
@@ -29,6 +29,7 @@ def index():
                     annotations = data.get("annotation", [])
                     highlighted_text = highlight_annotations(extracted_text, annotations)
             else:
+                check_folder()
                 extracted_text = extract_text_from_pdf(pdf_file)
                 with open(json_filename, "w", encoding="utf-8") as f:
                     json.dump({"content": extracted_text, "annotation": []}, f, ensure_ascii=False, indent=4)
