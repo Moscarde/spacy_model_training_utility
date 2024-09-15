@@ -1,19 +1,36 @@
-.highlight-blue {
-    background-color: lightblue;
-}
-
-.highlight-green {
-    background-color: lightgreen;
-}
-
-.highlight-red {
-    background-color: lightcoral;
-}
-
 .text-container {
-    white-space: pre-wrap; /* Respeitar quebras de linha no texto */
+    white-space: pre-wrap;
+    /* Respeitar quebras de linha no texto */
     width: 100%;
     border: 1px solid #ccc;
     padding: 10px;
     background-color: #f9f9f9;
+}
+
+button:hover {
+    background-color: #555555;
+}
+
+button {
+    color: #fff;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
 }

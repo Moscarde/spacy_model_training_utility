@@ -9,6 +9,15 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Include custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        {% if labels %}
+            {% for label, color in labels.items() %}
+            .highlight-{{ label }} {
+                background-color: {{ color }};
+            }
+            {% endfor %}
+        {% endif %}
+    </style>
 </head>
 
 <body>
@@ -23,9 +32,11 @@
 
         {% if extracted_text %}
         <div class="mt-4">
-            <button onclick="sendSelectedText('blue')" class="btn btn-primary">Azul</button>
-            <button onclick="sendSelectedText('green')" class="btn btn-success">Verde</button>
-            <button onclick="sendSelectedText('red')" class="btn btn-danger">Vermelho</button>
+            {% if labels %}
+                {% for label, color in labels.items() %}
+                    <button onclick="sendSelectedText('{{ label }}')" class=" highlight-{{ label }}">{{ label.capitalize() }}</button>
+                {% endfor %}
+            {% endif %}
             <button onclick="removeAllHighlights()" class="btn btn-secondary">Remover Marcações</button>
         </div>
 
@@ -35,6 +46,7 @@
         </div>
         {% endif %}
     </div>
+
 
     <!-- Include Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

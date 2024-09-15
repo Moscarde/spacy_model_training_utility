@@ -5,17 +5,19 @@ function getSelectedText() {
 }
 
 // Função para enviar o texto selecionado e a cor ao backend
-function sendSelectedText(color) {
+function sendSelectedText(label) {
     const selectedText = getSelectedText();
+    console.log("selectedText", selectedText)
+    console.log("Label", label)
     if (selectedText) {
-        fetch('/marcador', {
+        fetch('/highlight', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 text: selectedText,
-                color: color
+                label: label
             })
         })
             .then(response => response.json())
@@ -23,7 +25,7 @@ function sendSelectedText(color) {
                 if (data.success) {
                     console.log("Texto destacado com sucesso:", selectedText);
                     console.log("Posições:", data.pos);
-                    highlightText(selectedText, color);
+                    highlightText(selectedText, label);
                 }
             })
             .catch(error => console.error('Erro ao enviar o texto:', error));
@@ -33,16 +35,17 @@ function sendSelectedText(color) {
 }
 
 // Função para destacar o texto no frontend
-function highlightText(text, color) {
+function highlightText(text, label) {
     const textContentElement = document.getElementById('text-content');
     const innerHTML = textContentElement.innerHTML;
     const regex = new RegExp(`(${text})`, 'gi');
-    const highlightClass = `highlight-${color}`;
+    const highlightClass = `highlight-${label}`;
     textContentElement.innerHTML = innerHTML.replace(regex, `<span class="${highlightClass}">$1</span>`);
 }
 
+// Função para remover todas as marcações
 function removeAllHighlights() {
-    fetch('/remover-maracacoes', { method: 'POST' })
+    fetch('/remove-highlights', { method: 'POST' })
         .then(response => response.json())
         .then(data => {
             if (data.success) {

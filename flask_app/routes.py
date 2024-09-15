@@ -8,6 +8,7 @@ main_routes = Blueprint('main_routes', __name__)
 
 pdf_text = None
 json_filename = None
+labels = json.load(open("labels.json"))
 
 @main_routes.route("/", methods=["GET", "POST"])
 def index():
@@ -37,10 +38,10 @@ def index():
 
             pdf_text = extracted_text
 
-    return render_template("index.html", extracted_text=highlighted_text)
+    return render_template("index.html", extracted_text=highlighted_text, labels=labels)
 
-@main_routes.route("/remover-maracacoes", methods=["POST"])
-def remover_maracacoes():
+@main_routes.route("/remover-highlights", methods=["POST"])
+def remover_highlights():
     global json_filename
     if json_filename:
         try:
@@ -58,21 +59,21 @@ def remover_maracacoes():
             return jsonify({"success": False}), 500
     return jsonify({"success": False}), 400
 
-@main_routes.route("/marcador", methods=["POST"])
-def marcador():
+@main_routes.route("/highlight", methods=["POST"])
+def highlight():
     global pdf_text, json_filename
     data = request.get_json()
     target_text = data.get("text")
-    color = data.get("color")
+    label = data.get("label")
 
     pos = find_pos(pdf_text, target_text)
 
-    if target_text and color and pos:
+    if target_text and label and pos:
         with open(json_filename, "r", encoding="utf-8") as f:
             json_data = json.load(f)
 
         annotation = {
-            "label": [color.capitalize()],
+            "label": [label],
             "points": [{"start": pos["start"], "end": pos["end"], "text": target_text}],
         }
 
@@ -84,6 +85,6 @@ def marcador():
         with open(json_filename, "w", encoding="utf-8") as f:
             json.dump(json_data, f, ensure_ascii=False, indent=4)
 
-        return jsonify({"success": True, "pos": pos, "color": color})
+        return jsonify({"success": True, "pos": pos, "color": label})
 
     return jsonify({"success": False}), 400
