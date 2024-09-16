@@ -31,14 +31,17 @@
         </form>
 
         {% if extracted_text %}
-        <div class="mt-4">
+        <div class="d-flex justify-content-center mt-4 flex-wrap">
             {% if labels %}
                 {% for label, color in labels.items() %}
-                    <button onclick="sendSelectedText('{{ label }}')" class=" highlight-{{ label }}">{{ label.capitalize() }}</button>
+                    <button onclick="sendSelectedText('{{ label }}')" class=" highlight-{{ label }} m-1">{{ label.capitalize() }}</button>
                 {% endfor %}
             {% endif %}
+        </div>
+        <div class="d-flex justify-content-center mt-4">
             <button onclick="removeAllHighlights()" class="btn btn-secondary">Remover Marcações</button>
         </div>
+            
 
         <h2 class="mt-4">Texto Extraído:</h2>
         <div id="text-content" class="text-container">
