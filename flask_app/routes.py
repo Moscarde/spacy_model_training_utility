@@ -40,8 +40,8 @@ def index():
 
     return render_template("index.html", extracted_text=highlighted_text, labels=labels)
 
-@main_routes.route("/remover-highlights", methods=["POST"])
-def remover_highlights():
+@main_routes.route("/remove-highlights", methods=["POST"])
+def remove_highlights():
     global json_filename
     if json_filename:
         try:
