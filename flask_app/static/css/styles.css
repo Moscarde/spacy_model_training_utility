@@ -5,6 +5,10 @@
     border: 1px solid #ccc;
     padding: 10px;
     background-color: #f9f9f9;
+    
+}
+#text-content {
+    margin-bottom: 25rem;
 }
 
 button:hover {

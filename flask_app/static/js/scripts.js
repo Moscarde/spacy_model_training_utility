@@ -43,6 +43,7 @@ function highlightText(text, label) {
     textContentElement.innerHTML = innerHTML.replace(regex, `<span class="${highlightClass}">$1</span>`);
 }
 
+
 // Função para remover todas as marcações
 function removeAllHighlights() {
     fetch('/remove-highlights', { method: 'POST' })
@@ -54,3 +55,16 @@ function removeAllHighlights() {
             }
         });
 }
+
+// Função para remover a última as marcações
+function removeLastHighlight() {
+    fetch('/remove-last-highlight', { method: 'POST' })
+        .then(response => response.json())
+        .then(data => {
+            location.reload(); // Recarrega a página para remover as marcações
+        });
+}
+
+document.getElementById('pdfFile').addEventListener('change', function() {
+    document.getElementById('pdfForm').submit();
+});

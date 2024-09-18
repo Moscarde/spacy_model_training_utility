@@ -6,6 +6,9 @@ def extract_text_from_pdf(pdf_file):
     reader = PyPDF2.PdfReader(pdf_file)
     for page in reader.pages:
         text += page.extract_text()
+
+    if text == "":
+        text = "Nenhum texto encontrado no PDF."
     return text
 
 def highlight_annotations(text, annotations):
