@@ -1,7 +1,18 @@
 {
-    "nome": "#00ff00",
-    "skills": "#ff0000",
-    "email": "#0000ff",
-    "linkedin": "#0077b5",
-    "github": "#333333"
+    "nome_completo": "#33cc33",
+    "idade": "#ff6699",
+    "endereco": "#ffcc00",
+    "telefone": "#66ffcc",
+    "email": "#6666ff",
+    "links_perfil": "#cc33ff",
+    "experiencia_profissional": "#993333",
+    "funcao": "#66cc66",
+    "tempo_experiencia": "#993399",
+    "formacao_academica": "#999933",
+    "instituicao_academica": "#ffcc33",
+    "curso": "#66cccc",
+    "ano_formacao": "#9999cc",
+    "certificacao": "#ff3333",
+    "idioma": "#339966",
+    "atividade_voluntaria": "#ff9966"
 }
