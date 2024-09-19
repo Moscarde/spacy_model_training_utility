@@ -47,7 +47,7 @@ def index():
 
 @main_routes.route("/docs/<filename>")
 def docs(filename):
-    global pdf_text, json_filename
+    global json_filename
 
     original_filename = filename
     json_filename = os.path.join("train_data", f"{original_filename}.json")
@@ -60,9 +60,7 @@ def docs(filename):
             extracted_text = highlight_annotations(raw_text, annotations)
     else:
         extracted_text = "Documento não encontrado"
-        highlighted_text = None
 
-    pdf_text = extracted_text
     return render_template(
         "index.html",
         extracted_text=extracted_text,
@@ -112,30 +110,35 @@ def remove_last_highlight():
 
 @main_routes.route("/highlight", methods=["POST"])
 def highlight():
-    global pdf_text, json_filename
+    global json_filename
     data = request.get_json()
     target_text = data.get("text")
     label = data.get("label")
+    occurrencesIndex = data.get("index", 0)
 
-    pos = find_pos(pdf_text, target_text)
+    if not target_text and not label:
+        return jsonify({"success": False}), 400
 
-    if target_text and label and pos:
-        with open(json_filename, "r", encoding="utf-8") as f:
-            json_data = json.load(f)
+    with open(json_filename, "r", encoding="utf-8") as f:
+        json_data = json.load(f)
+        
+    pdf_text = json_data.get("content", "")
 
-        annotation = {
-            "label": [label],
-            "points": [{"start": pos["start"], "end": pos["end"], "text": target_text}],
-        }
+    pos = find_pos(pdf_text, target_text, occurrencesIndex)
 
-        if "annotation" not in json_data:
-            json_data["annotation"] = []
+    annotation = {
+        "label": [label],
+        "points": [{"start": pos["start"], "end": pos["end"], "text": target_text}],
+    }
 
-        json_data["annotation"].append(annotation)
+    if "annotation" not in json_data:
+        json_data["annotation"] = []
 
-        with open(json_filename, "w", encoding="utf-8") as f:
-            json.dump(json_data, f, ensure_ascii=False, indent=4)
+    json_data["annotation"].append(annotation)
 
-        return jsonify({"success": True, "pos": pos, "color": label})
+    with open(json_filename, "w", encoding="utf-8") as f:
+        json.dump(json_data, f, ensure_ascii=False, indent=4)
 
-    return jsonify({"success": False}), 400
+    return jsonify({"success": True, "pos": pos, "color": label})
+
+
