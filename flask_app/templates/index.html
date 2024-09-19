@@ -15,7 +15,7 @@
             .highlight-{{ label }} {
                 background-color: {{ color }};
             }
-            {% endfor %}
+                {% endfor %}
         {% endif %}
     </style>
 </head>
@@ -27,16 +27,18 @@
             <form id="pdfForm" action="/" method="POST" enctype="multipart/form-data" class="text-center">
                 <div class="mb-3">
                     <label for="pdfFile" class="form-label">Selecione o arquivo PDF</label>
-                    <input class="form-control" type="file" id="pdfFile" name="pdf_file" accept="application/pdf" required>
+                    <input class="form-control" type="file" id="pdfFile" name="pdf_file" accept="application/pdf"
+                        required>
                 </div>
             </form>
         </div>
 
         {% if extracted_text %}
-        <div class="mt-3 mb-5"  >
+        <div class="mt-3 mb-5">
             <h2 class="text-center">Texto Extraído:</h2>
             <div id="text-content" class="text-container">
-                {{ extracted_text | safe }}
+                <div id="original-text">{{ extracted_text | safe }}</div>
+                <div id="formatted-text" class="hidden"></div>
             </div>
         </div>
 
@@ -52,14 +54,14 @@
                 </div>
                 <div class="d-flex justify-content-center mt-3">
                     <button onclick="removeLastHighlight()" class="btn btn-primary m-1">Remover Última Marcação</button>
-                    <button onclick="removeAllHighlights()" class="btn btn-secondary m-1">Remover Todas as Marcações</button>
+                    <button onclick="removeAllHighlights()" class="btn btn-secondary m-1">Remover Todas as
+                        Marcações</button>
                 </div>
             </div>
         </div>
         {% endif %}
     </div>
 
-    
 
 
     <!-- Include Bootstrap JS and dependencies -->
