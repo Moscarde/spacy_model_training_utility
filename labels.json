@@ -1,0 +1,19 @@
+{
+    "nome_completo": "#33cc33",
+    "idade": "#ff6699",
+    "endereco": "#ffcc00",
+    "telefone": "#66ffcc",
+    "email": "#6666ff",
+    "links_perfil": "#cc33ff",
+    "perfil_bio": "#cc33cc",
+    "skills": "#33cc99",
+    "funcao_titulo": "#66cc66",
+    "funcao_data": "#993333",
+    "funcao_experiencia": "#993399",
+    "educacao_titulo": "#999933",
+    "educacao_data": "#ffcc33",
+    "educacao_experiencia": "#66cccc",
+    "certificacao": "#ff3333",
+    "idioma": "#339966",
+    "atividade_voluntaria": "#ff9966"
+}

@@ -163,5 +163,5 @@ cython_debug/
 
 
 # folders
-input/
+resumes/
 train_data/
