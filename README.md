@@ -6,7 +6,7 @@
 
 1. Python 3*
 2. Flask
-3. PyPDF2
+3. PyMuPDF
 
 ## Instalação
 ```
