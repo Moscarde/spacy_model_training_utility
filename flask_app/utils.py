@@ -1,18 +1,28 @@
 import os
-
+import fitz  # PyMuPDF
 import pdfplumber
 
 
 def extract_text_from_pdf(pdf_file):
-    text = ""
-    with pdfplumber.open(pdf_file) as pdf:
-        for page in pdf.pages:
-            page_text = page.extract_text()
-            if page_text:
-                text += page_text
-    if text.strip() == "":
-        text = "Nenhum texto encontrado no PDF."
-    return text
+    pdf_bytes = pdf_file.read()
+    # Abre o arquivo PDF a partir dos bytes
+    doc = fitz.open(stream=pdf_bytes, filetype="pdf")
+    extracted_text = []
+
+    # Itera sobre todas as páginas
+    for page_num in range(doc.page_count):
+        page = doc.load_page(page_num)  # Carrega a página
+        blocks = page.get_text("dict")["blocks"]
+
+        for block in blocks:
+            if "lines" in block:
+                block_text = ""
+                for line in block["lines"]:
+                    for span in line["spans"]:
+                        block_text += span["text"]
+                extracted_text.append(block_text.strip())
+
+    return "\n".join(extracted_text)
 
 
 def highlight_annotations(text, annotations):
